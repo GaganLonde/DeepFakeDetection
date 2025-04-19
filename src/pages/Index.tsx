@@ -61,7 +61,7 @@ export default function Index() {
         {/* Hero Section */}
         <div className="text-center space-y-4 mb-12">
           <div className="inline-flex items-center justify-center p-2 bg-deepfake-100 rounded-full">
-            <Shield className="h-6 w-6 text-deepfake-500" />
+            <Shield className="h-6 w-6 text-blue-800" />
           </div>
           <h1 className="text-4xl font-bold text-gray-900">
             Deepfake Detection Tool
