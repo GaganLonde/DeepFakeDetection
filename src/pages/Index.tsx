@@ -1,9 +1,8 @@
-
-import { useState } from 'react';
-import { Shield, Image as ImageIcon, AlertTriangle } from 'lucide-react';
-import { FileUpload } from '@/components/FileUpload';
-import { DetectionResult } from '@/components/DetectionResult';
-import { cn } from '@/lib/utils';
+import { useState } from "react";
+import { Shield, Image as ImageIcon, AlertTriangle } from "lucide-react";
+import { FileUpload } from "@/components/FileUpload";
+import { DetectionResult } from "@/components/DetectionResult";
+import { cn } from "@/lib/utils";
 
 type DetectionResult = {
   isDeepfake: boolean;
@@ -19,24 +18,37 @@ export default function Index() {
     setIsLoading(true);
     setResult(null);
 
-    // TODO: Replace with actual API call to your Python backend
     try {
       const formData = new FormData();
-      formData.append('image', file);
-      
-      // Simulate API call for now
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Mock result - replace with actual API call
+      formData.append("file", file);
+
+      const response = await fetch("http://localhost:8000/predict", {
+        method: "POST",
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to analyze image");
+      }
+
+      const data = await response.json();
+
+      if (data.error) {
+        throw new Error(data.error);
+      }
+
       setResult({
-        isDeepfake: Math.random() > 0.5,
-        confidence: 0.85 + Math.random() * 0.1,
+        isDeepfake: data.isDeepfake,
+        confidence: data.confidence / 100, // Convert percentage back to decimal
       });
     } catch (error) {
       setResult({
         isDeepfake: false,
         confidence: 0,
-        error: 'Failed to analyze image. Please try again.',
+        error:
+          error instanceof Error
+            ? error.message
+            : "Failed to analyze image. Please try again.",
       });
     } finally {
       setIsLoading(false);
@@ -51,9 +63,12 @@ export default function Index() {
           <div className="inline-flex items-center justify-center p-2 bg-deepfake-100 rounded-full">
             <Shield className="h-6 w-6 text-deepfake-500" />
           </div>
-          <h1 className="text-4xl font-bold text-gray-900">Deepfake Detection Tool</h1>
+          <h1 className="text-4xl font-bold text-gray-900">
+            Deepfake Detection Tool
+          </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Upload an image and our AI will analyze it for signs of manipulation or deepfake artifacts.
+            Upload an image and our AI will analyze it for signs of manipulation
+            or deepfake artifacts.
           </p>
         </div>
 
@@ -61,13 +76,17 @@ export default function Index() {
         <div className="grid gap-8 md:grid-cols-2">
           <div className="space-y-6">
             <FileUpload onFileSelect={handleFileSelect} />
-            
+
             <div className="bg-amber-50 rounded-lg p-4">
               <div className="flex items-start space-x-3">
                 <AlertTriangle className="h-5 w-5 text-amber-500 mt-0.5" />
                 <div className="text-sm text-amber-800">
                   <p className="font-medium">Important Note</p>
-                  <p>While our tool is highly accurate, it should not be used as the sole means of verification. Always cross-reference with other sources.</p>
+                  <p>
+                    While our tool is highly accurate, it should not be used as
+                    the sole means of verification. Always cross-reference with
+                    other sources.
+                  </p>
                 </div>
               </div>
             </div>
@@ -92,21 +111,18 @@ export default function Index() {
           {[
             {
               title: "Fast Analysis",
-              description: "Get results in seconds using our advanced AI model"
+              description: "Get results in seconds using our advanced AI model",
             },
             {
               title: "High Accuracy",
-              description: "Built on state-of-the-art deep learning techniques"
+              description: "Built on state-of-the-art deep learning techniques",
             },
             {
               title: "Privacy First",
-              description: "Your uploads are analyzed locally and never stored"
-            }
+              description: "Your uploads are analyzed locally and never stored",
+            },
           ].map((item) => (
-            <div 
-              key={item.title}
-              className="p-6 bg-white rounded-xl shadow-sm"
-            >
+            <div key={item.title} className="p-6 bg-white rounded-xl shadow-sm">
               <h3 className="font-semibold text-gray-900 mb-2">{item.title}</h3>
               <p className="text-gray-600 text-sm">{item.description}</p>
             </div>
