@@ -5,3 +5,36 @@ tensorflow==2.10.1
 h5py==3.7.0
 opencv-python==4.6.0.66
 numpy==1.23.5 
+
+frameworks:
+Based on the code, here are the frameworks and libraries being used in the frontend:
+
+1. React - The main frontend framework, as evidenced by the imports and use of React components (`React.FC`, `useState`)
+
+2. React Router - For handling navigation and routing
+   - Using `BrowserRouter`, `Routes`, `Route`, `useNavigate`
+   - Used for page navigation between Landing and Detect pages
+
+3. Framer Motion - For animations and transitions
+   - Used via the `motion` components
+   - Provides animations for hover effects, page transitions, and element appearances
+
+4. Tailwind CSS - For styling
+   - Evidenced by the utility classes like:
+   - `bg-gradient-to-br`, `text-white`, `rounded-xl`, `flex`, etc.
+   - Used for responsive design and styling throughout the application
+
+5. React Icons - For icon components
+   - Specifically using `react-icons/fa` for Font Awesome icons
+   - Icons used: `FaUpload`, `FaSpinner`, `FaArrowLeft`
+
+6. TanStack Query (React Query) - For data fetching
+   - Seen in `App.tsx` with `QueryClient`, `QueryClientProvider`
+
+Additional UI Components:
+- Custom UI components from what appears to be a component library:
+  - `Toaster`
+  - `TooltipProvider`
+  - `Sonner`
+
+This is a modern React stack using TypeScript (as seen by the `.tsx` extension and type annotations) for type safety and better development experience.
