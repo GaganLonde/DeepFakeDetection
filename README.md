@@ -1,73 +1,128 @@
-# Welcome to your Lovable project
+# DeepFake Detection System
 
-## Project info
+A modern web application for detecting deepfake images using machine learning. This project combines a React frontend with a Python backend to provide an intuitive interface for deepfake detection.
 
-**URL**: https://lovable.dev/projects/7b0ad286-166a-4dc7-81e1-9e62443cdb33
+![Project Screenshot](public/screenshot.png)
 
-## How can I edit this code?
+## Features
 
-There are several ways of editing your application.
+- 🎨 Modern, responsive UI with smooth animations
+- 📸 Easy image upload and preview
+- 🤖 Machine learning-based deepfake detection
+- 📊 Real-time analysis results with confidence scores
+- 🔄 Seamless integration between frontend and backend
+- 🎯 High accuracy in detecting manipulated images
 
-**Use Lovable**
+## Tech Stack
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/7b0ad286-166a-4dc7-81e1-9e62443cdb33) and start prompting.
+### Frontend
 
-Changes made via Lovable will be committed automatically to this repo.
+- React with TypeScript
+- Tailwind CSS for styling
+- Framer Motion for animations
+- React Router for navigation
+- TanStack Query for data fetching
 
-**Use your preferred IDE**
+### Backend
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+- Python
+- FastAPI
+- TensorFlow for machine learning
+- OpenCV for image processing
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Prerequisites
 
-Follow these steps:
+- Node.js (v16 or higher)
+- Python (v3.8 or higher)
+- npm or yarn
+- Git
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## Installation
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+1. Clone the repository:
 
-# Step 3: Install the necessary dependencies.
-npm i
+```bash
+git clone https://github.com/yourusername/deepfake-detection.git
+cd deepfake-detection
+```
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+2. Install frontend dependencies:
+
+```bash
+npm install
+```
+
+3. Set up Python virtual environment and install backend dependencies:
+
+```bash
+cd backend
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+## Running the Application
+
+1. Start the backend server:
+
+```bash
+cd backend
+python main.py
+```
+
+2. In a new terminal, start the frontend development server:
+
+```bash
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+3. Open your browser and navigate to `http://localhost:8080`
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Usage
 
-**Use GitHub Codespaces**
+1. Navigate to the Detect page
+2. Click "Choose Image" to select an image file
+3. Preview the selected image
+4. Click "Analyze Image" to process the image
+5. View the results showing whether the image is a deepfake and the confidence level
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Project Structure
 
-## What technologies are used for this project?
+```
+deepfake-detection/
+├── backend/
+│   ├── main.py
+│   ├── requirements.txt
+│   └── models/
+├── src/
+│   ├── pages/
+│   │   ├── Landing.tsx
+│   │   └── Detect.tsx
+│   ├── components/
+│   └── App.tsx
+├── public/
+└── package.json
+```
 
-This project is built with:
+## Contributing
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
 
-## How can I deploy this project?
+## License
 
-Simply open [Lovable](https://lovable.dev/projects/7b0ad286-166a-4dc7-81e1-9e62443cdb33) and click on Share -> Publish.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Can I connect a custom domain to my Lovable project?
+## Acknowledgments
 
-Yes, you can!
+- Thanks to all contributors who have helped with this project
+- Special thanks to the open-source community for the amazing tools and libraries
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+## Contact
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Your Name - [@yourtwitter](https://twitter.com/yourtwitter)
+
+Project Link: [https://github.com/yourusername/deepfake-detection](https://github.com/yourusername/deepfake-detection)
