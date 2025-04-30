@@ -42,7 +42,7 @@ A modern web application for detecting deepfake images using machine learning. T
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/deepfake-detection.git
+git clone https://github.com/GaganLonde/deepfake-detection.git
 cd deepfake-detection
 ```
 
@@ -112,10 +112,6 @@ deepfake-detection/
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## Acknowledgments
 
 - Thanks to all contributors who have helped with this project
@@ -125,4 +121,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Your Name - [@yourtwitter](https://twitter.com/yourtwitter)
 
-Project Link: [https://github.com/yourusername/deepfake-detection](https://github.com/yourusername/deepfake-detection)
+Project Link: [https://github.com/GaganLonde/DeepFakeDetection](https://github.com/GaganLonde/DeepFakeDetection)
