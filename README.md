@@ -119,6 +119,6 @@ deepfake-detection/
 
 ## Contact
 
-Your Name - [@yourtwitter](https://twitter.com/yourtwitter)
+Your Name - [@gagan_londe](https://x.com/gagan_londe?t=cbrm8mkuG2PL8IviyT3_IQ&s=08)
 
 Project Link: [https://github.com/GaganLonde/DeepFakeDetection](https://github.com/GaganLonde/DeepFakeDetection)
