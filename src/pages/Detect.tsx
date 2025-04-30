@@ -167,6 +167,18 @@ const Detect: React.FC = () => {
               </motion.div>
             )}
           </motion.div>
+
+          <div className="bg-yellow-900/30 border border-yellow-700 rounded-lg p-4 mt-8 text-yellow-200 text-sm">
+            <p className="font-semibold mb-2 text-center">
+              ⚠️ Important Disclaimer:
+            </p>
+            <p>
+              The accuracy of detection may vary based on image quality,
+              lighting conditions, and the sophistication of the deepfake.
+              Always use this tool as one of several methods for verification,
+              not as a definitive proof.
+            </p>
+          </div>
         </motion.div>
       </div>
     </div>
