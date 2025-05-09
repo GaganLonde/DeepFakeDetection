@@ -1,5 +1,6 @@
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 import numpy as np
 import cv2
 from tensorflow.keras.models import load_model
@@ -8,14 +9,18 @@ import os
 
 app = FastAPI()
 
-# Add CORS middleware
+# Add CORS middleware with more specific configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, replace with your frontend URL
+    allow_origins=["http://localhost:3000"],  # Frontend URL
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["*"],
+    expose_headers=["*"]
 )
+
+# Mount the models directory to serve static files
+app.mount("/models", StaticFiles(directory="models"), name="models")
 
 # Load the model
 model = load_model('models/mesonet_deepfake_detector_final.h5')

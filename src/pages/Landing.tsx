@@ -100,23 +100,31 @@ const Landing = () => {
             <div className="bg-gray-50 p-6 rounded-lg">
               <h3 className="text-xl font-semibold mb-4">Accuracy Plot</h3>
               <img
-                src="/models/accuracy_plot.png"
+                src="http://localhost:8000/models/accuracy_plot.png"
                 alt="Accuracy Plot"
                 className="w-full rounded-lg"
+                onError={(e) => {
+                  e.currentTarget.src =
+                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3f4f6'/%3E%3Ctext x='50' y='50' font-family='Arial' font-size='14' fill='%236b7280' text-anchor='middle' dominant-baseline='middle'%3EPlot not available%3C/text%3E%3C/svg%3E";
+                }}
               />
             </div>
             <div className="bg-gray-50 p-6 rounded-lg">
               <h3 className="text-xl font-semibold mb-4">Loss Plot</h3>
               <img
-                src="/models/loss_plot.png"
+                src="http://localhost:8000/models/loss_plot.png"
                 alt="Loss Plot"
                 className="w-full rounded-lg"
+                onError={(e) => {
+                  e.currentTarget.src =
+                    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f3f4f6'/%3E%3Ctext x='50' y='50' font-family='Arial' font-size='14' fill='%236b7280' text-anchor='middle' dominant-baseline='middle'%3EPlot not available%3C/text%3E%3C/svg%3E";
+                }}
               />
             </div>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
             <div className="text-center">
-              <div className="text-4xl font-bold text-blue-600 mb-2">67.5%</div>
+              <div className="text-4xl font-bold text-blue-600 mb-2">82.5%</div>
               <p className="text-gray-600">Accuracy</p>
             </div>
             <div className="text-center">
