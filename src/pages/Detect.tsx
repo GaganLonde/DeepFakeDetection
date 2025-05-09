@@ -70,7 +70,7 @@ const Detect: React.FC = () => {
           className="max-w-2xl mx-auto"
         >
           <h1 className="text-4xl font-bold mb-6 text-center">
-            DeepFake Detection
+            DeepFake Defender
           </h1>
           <p className="text-blue-200 text-center mb-8">
             Upload an image to check if it's a deepfake or real
