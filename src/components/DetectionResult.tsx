@@ -1,6 +1,5 @@
-
-import { CheckCircle2, XCircle, AlertCircle } from 'lucide-react';
-import { cn } from '@/lib/utils';
+import { CheckCircle2, XCircle, AlertCircle } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 type Result = {
   isDeepfake: boolean;
@@ -8,10 +7,10 @@ type Result = {
   error?: string;
 };
 
-export function DetectionResult({ 
-  result, 
-  isLoading 
-}: { 
+export function DetectionResult({
+  result,
+  isLoading,
+}: {
   result: Result | null;
   isLoading: boolean;
 }) {
@@ -43,10 +42,12 @@ export function DetectionResult({
   }
 
   return (
-    <div className={cn(
-      "p-8 rounded-xl",
-      result.isDeepfake ? "bg-red-50" : "bg-green-50"
-    )}>
+    <div
+      className={cn(
+        "p-8 rounded-xl",
+        result.isDeepfake ? "bg-red-50" : "bg-green-50"
+      )}
+    >
       <div className="flex items-center space-x-3">
         {result.isDeepfake ? (
           <XCircle className="h-8 w-8 text-red-500" />
@@ -54,17 +55,21 @@ export function DetectionResult({
           <CheckCircle2 className="h-8 w-8 text-green-500" />
         )}
         <div>
-          <h3 className={cn(
-            "font-semibold",
-            result.isDeepfake ? "text-red-900" : "text-green-900"
-          )}>
+          <h3
+            className={cn(
+              "font-semibold",
+              result.isDeepfake ? "text-red-900" : "text-green-900"
+            )}
+          >
             {result.isDeepfake ? "Deepfake Detected" : "Authentic Image"}
           </h3>
-          <p className={cn(
-            "text-sm",
-            result.isDeepfake ? "text-red-600" : "text-green-600"
-          )}>
-            Confidence: {(result.confidence * 100).toFixed(1)}%
+          <p
+            className={cn(
+              "text-sm",
+              result.isDeepfake ? "text-red-600" : "text-green-600"
+            )}
+          >
+            Confidence: {result.confidence.toFixed(1)}%
           </p>
         </div>
       </div>

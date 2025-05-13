@@ -41,7 +41,12 @@ const Detect: React.FC = () => {
       }
 
       const data = await response.json();
-      setResult(data);
+      if (data.error) {
+        alert("Failed to analyze image: " + data.error);
+        setResult(null);
+      } else {
+        setResult(data);
+      }
     } catch (error) {
       console.error("Error:", error);
       alert("Failed to analyze image. Please try again.");
