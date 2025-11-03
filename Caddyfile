@@ -1,0 +1,23 @@
+{
+  email you@example.com
+}
+
+# Replace example.com with your domain
+example.com {
+  encode gzip
+
+  @api path /api/*
+  handle @api {
+    reverse_proxy backend:8000
+  }
+
+  # Everything else to frontend
+  reverse_proxy frontend:80
+}
+
+# Optional: expose API on a subdomain
+# api.example.com {
+#   reverse_proxy backend:8000
+# }
+
+

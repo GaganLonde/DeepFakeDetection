@@ -1,0 +1,41 @@
+version: "3.9"
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    environment:
+      - PYTHONUNBUFFERED=1
+    volumes:
+      - ./backend/models:/app/models:ro
+    networks: [appnet]
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    networks: [appnet]
+
+  caddy:
+    image: caddy:2
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    depends_on:
+      - frontend
+      - backend
+    networks: [appnet]
+
+networks:
+  appnet:
+
+volumes:
+  caddy_data:
+  caddy_config:
+
+
