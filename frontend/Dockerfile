@@ -20,9 +20,13 @@ RUN npm run build
 
 FROM nginx:alpine
 
-# Use a SPA-friendly nginx config
-COPY frontend/nginx.conf /etc/nginx/conf.d/default.conf
+# We'll template the PORT into nginx conf at runtime for Cloud Run
+RUN apk add --no-cache bash curl gettext
+COPY frontend/nginx.conf /etc/nginx/conf.d/default.conf.template
 COPY --from=build /app/dist /usr/share/nginx/html
 
-EXPOSE 80
+ENV PORT=8080
+EXPOSE 8080
+
+CMD ["/bin/sh", "-c", "envsubst '\$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
 
