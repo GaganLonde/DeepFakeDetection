@@ -1,6 +1,5 @@
 # Prevent host deps and junk from entering Docker build context
 node_modules
-backend
 venv
 .git
 .gitignore

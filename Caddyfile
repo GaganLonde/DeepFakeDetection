@@ -2,17 +2,30 @@
   email you@example.com
 }
 
-# Replace example.com with your domain
-example.com {
+# Local development: serve on http://localhost
+:80 {
   encode gzip
 
-  @api path /api/*
-  handle @api {
+  # Proxy API and strip the /api prefix so FastAPI sees /predict
+  handle_path /api/* {
     reverse_proxy backend:8000
   }
 
   # Everything else to frontend
-  reverse_proxy frontend:80
+  reverse_proxy frontend:8080
+}
+
+# Replace example.com with your domain
+example.com {
+  encode gzip
+
+  # Proxy API and strip the /api prefix so FastAPI sees /predict
+  handle_path /api/* {
+    reverse_proxy backend:8000
+  }
+
+  # Everything else to frontend
+  reverse_proxy frontend:8080
 }
 
 # Optional: expose API on a subdomain
