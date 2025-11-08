@@ -31,7 +31,9 @@ const Detect: React.FC = () => {
     formData.append("file", selectedFile);
 
     try {
-      const response = await fetch("/api/predict", {
+      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "/api";
+      const apiUrl = `${apiBaseUrl}/predict`;
+      const response = await fetch(apiUrl, {
         method: "POST",
         body: formData,
       });

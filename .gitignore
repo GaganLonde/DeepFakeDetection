@@ -50,6 +50,7 @@ venv/
 ENV/
 env/
 .env/
+.env.production/
 .venv/
 env.bak/
 venv.bak/
