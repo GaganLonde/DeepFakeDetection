@@ -117,6 +117,14 @@ deepfake-detection/
 - Thanks to all contributors who have helped with this project
 - Special thanks to the open-source community for the amazing tools and libraries
 
+## Live Demo
+
+🌐 **Frontend:** [https://deepfake-frontend-898179772058.asia-south1.run.app](https://deepfake-frontend-898179772058.asia-south1.run.app)
+
+🔧 **Backend API:** [https://backend-898179772058.asia-south1.run.app](https://backend-898179772058.asia-south1.run.app)
+
+📚 **API Documentation:** [https://backend-898179772058.asia-south1.run.app/docs](https://backend-898179772058.asia-south1.run.app/docs)
+
 ## Contact
 
 Your Name - [@gagan_londe](https://x.com/gagan_londe?t=cbrm8mkuG2PL8IviyT3_IQ&s=08)
