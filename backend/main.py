@@ -23,7 +23,7 @@ app.add_middleware(
 app.mount("/models", StaticFiles(directory="models"), name="models")
 
 # Load the model
-model = load_model('models/mesonet_deepfake_detector_final.h5')
+model = load_model('models/deepfake_detector_final.h5')
 
 @app.post("/predict")
 async def predict_image(file: UploadFile = File(...)):
