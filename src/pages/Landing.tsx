@@ -3,6 +3,8 @@ import { Shield, Zap, BarChart2, CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Landing = () => {
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? "";
+
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
@@ -100,7 +102,7 @@ const Landing = () => {
             <div className="bg-gray-50 p-6 rounded-lg">
               <h3 className="text-xl font-semibold mb-4">Accuracy Plot</h3>
               <img
-                src="http://localhost:8000/models/accuracy_plot.png"
+                src={`${apiBaseUrl}/models/accuracy_plot.png`}
                 alt="Accuracy Plot"
                 className="w-full rounded-lg"
                 onError={(e) => {
@@ -112,7 +114,7 @@ const Landing = () => {
             <div className="bg-gray-50 p-6 rounded-lg">
               <h3 className="text-xl font-semibold mb-4">Loss Plot</h3>
               <img
-                src="http://localhost:8000/models/loss_plot.png"
+                src={`${apiBaseUrl}/models/loss_plot.png`}
                 alt="Loss Plot"
                 className="w-full rounded-lg"
                 onError={(e) => {

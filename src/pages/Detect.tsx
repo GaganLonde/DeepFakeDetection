@@ -16,6 +16,15 @@ const Detect: React.FC = () => {
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
+      if (file.size > 4 * 1024 * 1024) {
+        setSelectedFile(null);
+        setPreviewUrl(null);
+        setResult(null);
+        event.currentTarget.value = "";
+        alert("Please choose an image smaller than 4 MB.");
+        return;
+      }
+
       setSelectedFile(file);
       setPreviewUrl(URL.createObjectURL(file));
       setResult(null);
@@ -31,7 +40,7 @@ const Detect: React.FC = () => {
     formData.append("file", selectedFile);
 
     try {
-      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL || "/api";
+      const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? "";
       const apiUrl = `${apiBaseUrl}/predict`;
       const response = await fetch(apiUrl, {
         method: "POST",

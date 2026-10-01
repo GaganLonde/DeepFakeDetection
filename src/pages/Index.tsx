@@ -13,6 +13,7 @@ type DetectionResult = {
 export default function Index() {
   const [isLoading, setIsLoading] = useState(false);
   const [result, setResult] = useState<DetectionResult | null>(null);
+  const apiBaseUrl = import.meta.env.VITE_API_BASE_URL ?? "";
 
   const handleFileSelect = async (file: File) => {
     setIsLoading(true);
@@ -22,7 +23,7 @@ export default function Index() {
       const formData = new FormData();
       formData.append("file", file);
 
-      const response = await fetch("http://localhost:8000/predict", {
+      const response = await fetch(`${apiBaseUrl}/predict`, {
         method: "POST",
         body: formData,
       });

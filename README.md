@@ -117,13 +117,16 @@ deepfake-detection/
 - Thanks to all contributors who have helped with this project
 - Special thanks to the open-source community for the amazing tools and libraries
 
-## Live Demo
+## Deploy on Vercel
 
-🌐 **Frontend:** [https://deepfake-frontend-898179772058.asia-south1.run.app](https://deepfake-frontend-898179772058.asia-south1.run.app)
+The FastAPI backend and Vite frontend deploy together as one Vercel project. The Python function serves the API and the built frontend from the same origin, so no external API URL or production CORS configuration is needed.
 
-🔧 **Backend API:** [https://backend-898179772058.asia-south1.run.app](https://backend-898179772058.asia-south1.run.app)
+1. Import this repository into Vercel with the repository root as the project root.
+2. Select the **FastAPI** framework preset if Vercel does not detect it automatically.
+3. Keep the Python version at 3.12 and the build command at `npm run build`.
+4. Deploy. The frontend is available at `/`, and the API at `/predict`.
 
-📚 **API Documentation:** [https://backend-898179772058.asia-south1.run.app/docs](https://backend-898179772058.asia-south1.run.app/docs)
+Vercel Hobby functions limit request bodies to 4.5 MB, so uploaded images must stay below that size. TensorFlow also makes the function bundle large; if the deployment reports a bundle-size error, enable Vercel's Large Functions support for the project or use a smaller inference runtime.
 
 ## Contact
 
