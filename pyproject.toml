@@ -16,4 +16,4 @@ dependencies = [
 entrypoint = "backend.main:app"
 
 [tool.vercel.scripts]
-build = "npm run build"
+build = "npm ci && npm run build"

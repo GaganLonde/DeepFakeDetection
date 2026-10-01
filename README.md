@@ -123,7 +123,7 @@ The FastAPI backend and Vite frontend deploy together as one Vercel project. The
 
 1. Import this repository into Vercel with the repository root as the project root.
 2. Select the **FastAPI** framework preset if Vercel does not detect it automatically.
-3. Keep the Python version at 3.12 and the build command at `npm run build`.
+3. Keep the Python version at 3.12 and set the build command to `npm ci && npm run build`.
 4. Deploy. The frontend is available at `/`, and the API at `/predict`.
 
 Vercel Hobby functions limit request bodies to 4.5 MB, so uploaded images must stay below that size. TensorFlow also makes the function bundle large; if the deployment reports a bundle-size error, enable Vercel's Large Functions support for the project or use a smaller inference runtime.
