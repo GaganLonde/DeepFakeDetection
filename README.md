@@ -117,16 +117,36 @@ deepfake-detection/
 - Thanks to all contributors who have helped with this project
 - Special thanks to the open-source community for the amazing tools and libraries
 
-## Deploy on Vercel
+## Deploy
 
-The FastAPI backend and Vite frontend deploy together as one Vercel project. The Python function serves the API and the built frontend from the same origin, so no external API URL or production CORS configuration is needed.
+Deploy the FastAPI backend to Cloud Run and keep the Vite frontend on Vercel. This keeps TensorFlow in a container instead of a Vercel serverless bundle.
 
-1. Import this repository into Vercel with the repository root as the project root.
-2. Select the **FastAPI** framework preset if Vercel does not detect it automatically.
-3. Keep the Python version at 3.12 and set the build command to `npm ci && npm run build`.
-4. Deploy. The frontend is available at `/`, and the API at `/predict`.
+### Backend on Cloud Run
 
-Vercel Hobby functions limit request bodies to 4.5 MB, so uploaded images must stay below that size. TensorFlow also makes the function bundle large; if the deployment reports a bundle-size error, enable Vercel's Large Functions support for the project or use a smaller inference runtime.
+1. Authenticate, select your Google Cloud project, and enable Cloud Run and Cloud Build:
+
+```powershell
+gcloud auth login
+gcloud config set project YOUR_GCP_PROJECT_ID
+gcloud services enable run.googleapis.com cloudbuild.googleapis.com
+```
+
+2. Deploy the backend to Mumbai (`asia-south1`). Replace the CORS origin with your Vercel Production domain, without a trailing slash. Local Docker is not required; Cloud Run builds the image from `backend/Dockerfile`:
+
+```powershell
+gcloud run deploy deepfake-backend --source backend --region asia-south1 --allow-unauthenticated --memory 2Gi --cpu 1 --concurrency 1 --timeout 300 --min 0 --max 1 --set-env-vars "CORS_ORIGINS=https://YOUR-VERCEL-DOMAIN"
+```
+
+Copy the HTTPS service URL printed when deployment finishes.
+
+Cloud Run's request-based free tier includes monthly CPU, memory, and request quotas; `asia-south1` is a Tier 1 region. Scale-to-zero helps avoid idle compute charges, but free usage is shared across projects on the billing account and is not a guarantee of a zero bill. Cloud Build, Artifact Registry storage, and network egress can have separate charges. Set a budget alert in Google Cloud Billing and monitor usage.
+
+### Frontend on Vercel
+
+1. Set the Vercel Framework Preset to **Vite**, with the repository root as the Root Directory.
+2. Set the Build Command to `npm ci && npm run build` and the Output Directory to `dist`.
+3. Add `VITE_API_BASE_URL` in the Production environment with the Cloud Run service URL, without a trailing slash.
+4. Redeploy the frontend. The API endpoint is `<Cloud Run service URL>/predict`.
 
 ## Contact
 

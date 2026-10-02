@@ -1,6 +1,5 @@
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pathlib import Path
 import numpy as np
@@ -11,18 +10,17 @@ import os
 
 BACKEND_DIR = Path(__file__).resolve().parent
 MODEL_DIR = BACKEND_DIR / "models"
-FRONTEND_DIST = BACKEND_DIR.parent / "dist"
+cors_origins = os.getenv(
+    "CORS_ORIGINS",
+    "http://localhost:8080,http://127.0.0.1:8080",
+)
 
 app = FastAPI()
 
 # Add CORS middleware with more specific configuration
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:8080",
-        "http://127.0.0.1:8080",
-        "https://deep-fake-detection-sandy.vercel.app",
-    ],
+    allow_origins=[origin.strip() for origin in cors_origins.split(",") if origin.strip()],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -68,28 +66,3 @@ async def predict_image(file: UploadFile = File(...)):
 
     except Exception as e:
         return {"error": str(e)}
-
-
-if FRONTEND_DIST.is_dir():
-    app.mount(
-        "/assets",
-        StaticFiles(directory=str(FRONTEND_DIST / "assets")),
-        name="frontend-assets",
-    )
-
-    @app.get("/", include_in_schema=False)
-    async def serve_frontend_root():
-        return FileResponse(FRONTEND_DIST / "index.html")
-
-    @app.get("/{path:path}", include_in_schema=False)
-    async def serve_frontend_route(path: str):
-        frontend_root = FRONTEND_DIST.resolve()
-        requested_file = (frontend_root / path).resolve()
-        try:
-            requested_file.relative_to(frontend_root)
-        except ValueError:
-            requested_file = frontend_root / "index.html"
-
-        if not requested_file.is_file():
-            requested_file = frontend_root / "index.html"
-        return FileResponse(requested_file)
